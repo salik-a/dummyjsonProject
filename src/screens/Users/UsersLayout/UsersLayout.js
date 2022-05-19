@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView, TouchableOpacity, FlatList } from 'react-native'
+import { View, Text, SafeAreaView, TouchableOpacity, FlatList, Button } from 'react-native'
 import React from 'react'
 
 import UserCard from '../Components/UserCard/UserCard'
@@ -15,9 +15,9 @@ export default function UsersLayout({
 
         <UserCard
             onPress={() => { navigation.navigate('UserDetail', { userId: item.id }) }}
-            name={item.firstName}
-            age={item.age}
-            image={item.image}
+            name={item?.firstName}
+            age={item?.age}
+            image={item?.image}
         />
 
     )
@@ -37,6 +37,7 @@ export default function UsersLayout({
             >
                 Users
             </Text>
+            <Button title={'ADD NEW'} onPress={() => navigation.navigate('AddNewUser')} style={{ position: 'absolute', bottom: 0 }} />
             <View style={styles.body}>
                 <FlatList
                     style={styles.listStyle}

@@ -1,7 +1,8 @@
 import { View, Text, SafeAreaView, ActivityIndicator } from 'react-native'
 import React, { useState, useEffect } from 'react'
 
-// import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux';
+
 
 import UsersLayout from './UsersLayout/UsersLayout'
 
@@ -10,6 +11,8 @@ import UserServices from '../../services/userServices'
 export default function Users({ navigation, route }) {
 
     const userServices = new UserServices()
+
+    const newUser = useSelector(state => state.general.newUser);
 
     const [usersData, setUsersData] = useState([])
     const [usersDataLoading, setUsersDataLoading] = useState(true)
@@ -24,6 +27,12 @@ export default function Users({ navigation, route }) {
                 console.log(err.response)
             })          
     }, [])
+
+    useEffect(() => {
+        if (newUser) {
+            setUsersData(exData => ([newUser, ...exData]))
+        }
+    }, [newUser])
 
     if (usersDataLoading) {
         return (
