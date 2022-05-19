@@ -1,1 +1,1 @@
-export { default } from "./RequestApprovalDetail"
+export { default } from "./Users"
